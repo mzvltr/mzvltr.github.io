@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>hello JavaScript!</title>
+    <script>
+      function addItem(result){
+        var element = document.getElementById("history");
+        var last = element.getElementsByTagName("p")[0].innerHTML;
+        element.getElementsByTagName("p")[0].innerHTML = result + "<br>" + last;
+      }
+
+      function makeRandom(){
+        var hi = document.getElementById("hi");
+        var lo = document.getElementById("lo");
+        var output;
+        if(hi.checkValidity() == false || lo.checkValidity() == false){
+          output = "The top and bottom should be a number between 1 and 999";
+        }else{
+          var topNum = Number.parseInt(hi.value);
+          var bottomNum = Number.parseInt(lo.value);
+          if(topNum <= bottomNum){
+            output = "The topNum is not less than bottomNum.";
+          }else{
+            var gap = topNum - bottomNum;
+            var created = bottomNum + Math.random() * gap;
+            var ret = Math.floor(created);
+            output = "The random number between "
+                + bottomNum +" and " + topNum +" is " + ret;
+            addItem(ret);
+          }
+        }
+        document.getElementById("result").innerHTML = output;
+        
+      }
+    </script>
+  </head>
+  <body>
+
+    <p id="demo">Hello? generate a number in the range of [bottom, top).</p>
+    <div>
+      bottom: <input id="lo" type="number" min="1" max="999" required>
+      top: <input id="hi" type="number" min="1" max="999" required>
+      <button type="button" onclick="makeRandom()">Click me!</button>
+    </div>
+    <p id="result"></p>
+    <div id="history"><p id="pp"></p></div>
+  </body>
+</html>
